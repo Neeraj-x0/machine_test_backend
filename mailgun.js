@@ -9,7 +9,7 @@ const mg = mailgun.client({
 });
 
 const sendMail = async (to, subject, text, name,token) => {
-  const resetlink = `http://localhost:5173/forgot/?token=${token}`;
+  const resetlink = `https://machine-test.neerajx0.xyz/forgot/?token=${token}`;
   const data = {
     from: process.env.MAILGUN_FROM_EMAIL,
     to,
