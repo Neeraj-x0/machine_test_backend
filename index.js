@@ -38,6 +38,9 @@ const authenticate = (req, res, next) => {
   }
 
   try {
+    if (!req.header("Authorization")) {
+      throw new Error("Please authenticate.");
+    }
     const token = req.header("Authorization").replace("Bearer ", "");
     const decoded = jwt.verify(token.trim(), process.env.JWT_SECRET);
     req.user = decoded;
