@@ -46,7 +46,6 @@ const authenticate = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    console.log(error);
     res.status(401).send({ error: "Please authenticate." });
   }
 };
@@ -60,7 +59,6 @@ app.post("/signup", async (req, res) => {
     await signUp({ name, email, password, gender, phone, location });
     res.send({ message: "User created" });
   } catch (error) {
-    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
@@ -71,7 +69,7 @@ app.post("/login", async (req, res) => {
     const { token, user } = await login(email, password);
     res.send({ token, user });
   } catch (error) {
-    console.log(error);
+    
     res.status(400).send({ error: error.message });
   }
 });
@@ -92,7 +90,7 @@ app.post("/verify", async (req, res) => {
     await verifyToken(token.trim());
     res.send({ message: "Token is valid" });
   } catch (error) {
-    console.log(error);
+    
     res.status(400).send({ error: error.message });
   }
 });
@@ -103,7 +101,7 @@ app.post("/reset", async (req, res) => {
     await resetPassword(token, newPassword);
     res.send({ message: "Password reset successfully" });
   } catch (error) {
-    console.log(error);
+    
     res.status(400).send({ error: error.message });
   }
 });
