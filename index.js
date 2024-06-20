@@ -1,12 +1,11 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
-
 
 const {
   signUp,
@@ -38,8 +37,8 @@ const authenticate = (req, res, next) => {
     return next();
   }
 
-  const token = req.header("Authorization").replace("Bearer ", "");
   try {
+    const token = req.header("Authorization").replace("Bearer ", "");
     const decoded = jwt.verify(token.trim(), process.env.JWT_SECRET);
     req.user = decoded;
     next();
